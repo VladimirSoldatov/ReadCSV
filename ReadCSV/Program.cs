@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,29 +12,24 @@ namespace ReadCSV
     {
         static void Main(string[] args)
         {
-      
-            string fileName = "Вылеты.csv";
-            List<OneFly> flyList = new List<OneFly>();
-            if(File.Exists(fileName))
-            using (StreamReader sr = new StreamReader(fileName))
+            Console.WriteLine("Выбирите способ получения данных\n1. Файл\n2.SQL");
+            if(Int32.TryParse(Console.ReadLine(),out int result))
             {
-                    while (!sr.EndOfStream)
-                    {
-                        string line = String.Empty;
-                        line = sr.ReadLine();
-                        line = line.Trim().Replace("\"", "");
-                        //Console.WriteLine(line);
-                        OneFly oneFly = new OneFly(line.Split(new char[] { ';',' '},StringSplitOptions.RemoveEmptyEntries));
-                        flyList.Add(oneFly);
-                    }
+                switch (result)
+                {
+                    case 1:
+                        new SQLReader();
+                        break;
+                    case 2:
+                        new FromFile();
+                        break;
+
+                }
+
+
             }
-            else
-            {
-                Console.WriteLine("Файл не существует!");
-            }
-            GetData getData = new GetData(flyList);
-            getData.getfliesByDate("2005-01-01");
-           // getData.getfliesNotFullName("Lopez");
+  
         }
+
     }
 }

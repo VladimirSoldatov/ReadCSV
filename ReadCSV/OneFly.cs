@@ -20,13 +20,13 @@ namespace ReadCSV
             }
         public OneFly(string[] arguments )
         {
-            DateFly = DateTime.Parse(arguments[0]);
-            PassangerName = arguments[1];
-            CompanyName = arguments[2];
-            PlaneName = arguments[3];
-            FromCity = arguments[4];
-            ToCity = arguments[5];
-            Place = arguments[6];
+            DateFly = DateTime.Parse(arguments[0].Trim().Replace("\"", ""));
+            PassangerName = arguments[1].Trim().Replace("\"", "");
+            CompanyName = arguments[2].Trim().Replace("\"", "");
+            PlaneName = arguments[3].Trim().Replace("\"", "");
+            FromCity = arguments[4].Trim().Replace("\"", "");
+            ToCity = arguments[5].Trim().Replace("\"", "");
+            Place = arguments[6].Trim().Replace("\"", "");
         }
         public DateTime DateFly { get; set; }
         public string PassangerName { get; set; }
